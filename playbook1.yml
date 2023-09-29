@@ -1,0 +1,19 @@
+ - name: Test aap execution
+   hosts: all
+
+   tasks:
+
+    - name: Copy the custom MOTD file
+      copy:
+        content: "This is the first step in the workflow" 
+        dest: /etc/motd
+      register: result
+
+    - name: set a variable to be used in the next play
+      set_fact:
+        cached_var: "this a cached var passed between plays"
+        cacheable: true
+
+    - name: Print Workflow Var
+      debug: 
+        msg: "{{ workflow_var }}"
